@@ -1,0 +1,16 @@
+# ultralytics>=8.3 起才支持 YOLO11 模型（yolo11*.pt）。
+# 原先锁定 8.0.196 无法加载 yolo11 权重，会直接导致运行时崩溃。
+# 其余依赖使用 >= 下限，交由 pip 解析兼容版本，避免与 numpy2/新版 opencv 冲突。
+ultralytics>=8.3.0
+dashscope>=1.14.1
+opencv-python>=4.9.0
+matplotlib>=3.7.2
+numpy>=1.26.0
+python-dotenv>=1.0.0
+
+# --- Web 前后端 ---
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+# 浏览器可播放的 H.264 视频转码（自带静态 ffmpeg）
+imageio-ffmpeg>=0.4.0
