@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智慧课堂分析系统</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">智</div>
+        <div class="brand-text">
+          <h1>智慧课堂分析系统</h1>
+          <p>YOLO 姿态识别 · 专注度分析 · AI 教学建议</p>
+        </div>
+      </div>
+      <div class="server-state" id="serverState">
+        <span class="dot" id="healthDot"></span>
+        <span id="healthText">连接服务中…</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="col-main">
+        <!-- 上传卡片 -->
+        <section class="card upload-card">
+          <h2 class="card-title">开始分析</h2>
+          <div class="dropzone" id="dropzone" role="button" tabindex="0">
+            <input type="file" id="fileInput" hidden
+                   accept=".jpg,.jpeg,.png,.bmp,.mp4,.avi,.mov,.mkv" />
+            <div class="dz-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p class="dz-main">拖拽到此处，或点击选择文件</p>
+            <p class="dz-hint">支持 JPG / PNG / BMP 图片，MP4 / AVI / MOV / MKV 视频</p>
+            <div class="file-chip" id="fileChip" hidden></div>
+          </div>
+          <div class="upload-actions">
+            <button class="btn btn-primary" id="analyzeBtn" disabled>开始分析</button>
+            <span class="upload-tip" id="uploadTip"></span>
+          </div>
+        </section>
+
+        <!-- 进度卡片 -->
+        <section class="card progress-card" id="progressCard" hidden>
+          <h2 class="card-title">分析进度</h2>
+          <div class="progress-meta">
+            <span class="badge" id="pStatus">分析中</span>
+            <span class="progress-msg" id="pMessage">初始化…</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="pFill" style="width:0%"></div>
+          </div>
+          <div class="progress-num" id="pNum">0%</div>
+        </section>
+
+        <!-- 结果卡片 -->
+        <section class="card result-card" id="resultCard" hidden>
+          <div class="result-head">
+            <div>
+              <h2 class="card-title" id="rTitle">分析结果</h2>
+              <div class="result-sub" id="rSub"></div>
+            </div>
+            <div id="rActions"></div>
+          </div>
+
+          <div class="metrics-grid" id="metricsGrid"></div>
+
+          <div class="result-block" id="mediaWrap" hidden>
+            <h3 class="block-title">标注结果</h3>
+            <div id="mediaViewer"></div>
+          </div>
+
+          <div class="result-block">
+            <h3 class="block-title">分析看板</h3>
+            <div class="dash-wrap">
+              <img id="dashImg" alt="分析看板" />
+            </div>
+          </div>
+
+          <div class="result-block">
+            <h3 class="block-title">智能分析报告</h3>
+            <pre class="report-text" id="reportText">加载中…</pre>
+          </div>
+        </section>
+
+        <div class="error-toast" id="errorToast" hidden></div>
+      </section>
+
+      <aside class="col-side">
+        <section class="card history-card">
+          <div class="history-head">
+            <h2 class="card-title">历史分析</h2>
+            <button class="btn btn-ghost btn-sm" id="refreshBtn">刷新</button>
+          </div>
+          <ul class="history-list" id="historyList">
+            <li class="history-empty">暂无历史记录</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
